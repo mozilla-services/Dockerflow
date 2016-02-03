@@ -12,9 +12,11 @@
   "bugs": "https://github.com/mozilla-services/dockerflow/issues",
   "main": "server.js",
   "engines": {
-    "node": ">=4.2.6"
+    "node": ">=4.2.0"
   },
   "dependencies": {
+    "httpdispatcher":"1.0.0",
+    "mozlog":"2.0.2"
   },
   "devDependencies": {
   },
