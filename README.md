@@ -32,7 +32,7 @@ The Dockerflow was designed with the goals of making deployment of applications 
 
 Don't panic. These are easy and will help everybody Go Faster (tm).
 
-### A running container must...
+### A containerized app must...
 
 1. Listen on `$PORT` for HTTP requests
 2. Respond to `/__version__` with a [JSON version object](https://docs.google.com/document/d/1rGVyiLYvZyKE2oHcSVx-vBmQRKhs1kLLgn7xeCs6qKs/edit?usp=sharing)
@@ -43,54 +43,54 @@ Don't panic. These are easy and will help everybody Go Faster (tm).
   * used by the load balancer to check if the server and application is OK
   * do not include dependency checks as this check may trigger automatic node termination and replacement
 
-### Run time configurations...
+### Configuration should follow these conventions...
 
-The preferred and recommended method is for the application to take its configuration from environment variables. This improves deployability and interopability. These should be defined and documented somewhere in the application's repository.
+The preferred and recommended method is to only use environment variables. This improves deployability and interopability. These should be documented in the application's repository.
 
-However, if configuration files are more suitable it should look for them in `$CONFIG_PATH`. This environment variable will be set and can point at either a single file or a directory. It is up to the application to use `$CONFIG_PATH` appropriately. 
+However, if configuration files are more suitable then application should look for them in `$CONFIG_PATH`. This environment variable will point at either a single file or a directory. It is up to the application to use `$CONFIG_PATH` appropriately. 
 
-The format of the configuration file(s) should be documented with examples. These require CloudOps to generate them at deploy time.
+The format of the configuration file(s) should be documented with examples. 
 
 ### Sending metrics and logs...
 
-Applications can send statsd to `$STATSD_HOST` and `$STATD_PORT`. It is recommended to check that these environment variable are set before sending metrics. Access to the statsd dashboard is available on request from CloudOps.
+Applications can send statsd to `$STATSD_HOST` and `$STATD_PORT`. Check that these environment variable are set before sending metrics. Access to the statsd dashboard is available on request from CloudOps.
 
-Logs should be written to `stdout` and `stderr` in the mozlog format. Logs will be sent to an ElasticSearch cluster. This is an opt-in feature and must be requested from CloudOps to enable.
+Logs should be written to `stdout` and `stderr` as JSON in the [logging standard format](https://mana.mozilla.org/wiki/pages/viewpage.action?pageId=42895640). Logs will be sent to an ElasticSearch cluster. This is an opt-in feature and must be requested from CloudOps to enable.
 
 
-----
-## Creating a Dockerfile
+## Building the Container
 
-*note: this section needs work as our Dockerfile build recommendations has changed a bit.*
+### Dockerfile Examples 
 
-* [BrowserID Verifier: Node 4](https://github.com/mozilla/browserid-verifier/blob/master/Dockerfile)
-* [Tokenserver: Python 2.7](https://github.com/mozilla-services/tokenserver/blob/master/Dockerfile)
-
-Other Examples:
-
-* [Tiles Onyx: Python 2.7](https://github.com/oyiptong/onyx/blob/master/Dockerfile)
-* [Mozilla-IDP: node 0.8](https://github.com/mozilla-services/mozilla-idp/blob/master/Dockerfile)  
-  * Very old school nodejs app that talks to our LDAP for Persona log ins. Requires installation of system package (libgmp-dev) for crypto math operations.  Example of cleaning up unnecessary files out of container
-* [Shavar: Python 2.7](https://github.com/mozilla-services/shavar/blob/master/Dockerfile)
-
+* [BrowserID Verifier - Node 4](https://github.com/mozilla/browserid-verifier/blob/master/Dockerfile)
+* [Tokenserver - Python 2.7](https://github.com/mozilla-services/tokenserver/blob/master/Dockerfile)
 
 ### Dockerfile Guidelines
-*note: section requires work too.*
 
 * Use the official Docker containers for a language. CloudOps pre-caches these on machines so downloading containers based on them is fast. 
   * [Node](https://hub.docker.com/_/node/)
   * [Python](https://hub.docker.com/_/python/)
   * [Golang](https://hub.docker.com/_/golang/)
 * Build the smallest container you can
-* Optimize for cachability. Put commands that make fewer changes (`apt-get`, `pip install ...`, `npm install`) earlier in the `Dockerfile`.
+* Optimize for cachability. Put commands that make fewer changes (`apt-get`, `pip install`, `npm install`) earlier in the `Dockerfile`.
 * Set a non-root user and group `app` in the container and run everything as this user
   * make the uid for the user `10001`
   * make the guid for the group `10001`
 
+
+### Automating the Build
+
+1. Use CircleCI to build and test your container
+2. If the container passes tests push it to Docker Hub with CircleCI
+3. ... (todo)
+
 ----
+
 ## About this Demo
 
-todo:
+The demo build a container with a nodejs web application that parses and serves the README.md markdown file.
+
+todo (also tbd if these are good ideas):
 
 * create circle.yml -- standarized and meant to copy/paste between projects
 * create a version.json generator
