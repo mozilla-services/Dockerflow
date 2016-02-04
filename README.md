@@ -1,6 +1,10 @@
+[![Docker Build Status](https://circleci.com/gh/mozilla-services/Dockerflow/tree/master.svg?style=shield&circle-token=c7c606e039cdccd2380782672ac12b2e85550295)](https://circleci.com/gh/mozilla-services/Dockerflow)
+
 # About
 
 CloudOps supports docker containers for deployment. This repo is both documentation and demonstration of how to instrument your application to reduce deployment friction. 
+
+**NOTE: this is a work in progress. Tags will be created on this repo when the Dockerflow spec has stabilized a bit.**
 
 ## Dockerflow
 
@@ -85,18 +89,3 @@ Logs should be written to `stdout` and `stderr` as JSON in the [logging standard
 3. ... (todo)
 
 ----
-
-## About this Demo
-
-The demo build a container with a nodejs web application that parses and serves the README.md markdown file.
-
-todo (also tbd if these are good ideas):
-
-* create circle.yml -- standarized and meant to copy/paste between projects
-* create a version.json generator
-* create a web application that serves content
-* create standardized example scripts: 
-  * `.dockerflow/build.sh`
-  * `.dockerflow/test.sh`
-* create tests to run in the container
-* 
