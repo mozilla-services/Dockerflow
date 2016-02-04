@@ -3,7 +3,7 @@ FROM node:4.2.4
 # add a non-privileged user for installing and running
 # the application
 RUN groupadd --gid 10001 app && \
-    useradd --uid 10001 --gid 1001 --home /app --create-home app
+    useradd --uid 10001 --gid 10001 --home /app --create-home app
 
 WORKDIR /app
 
