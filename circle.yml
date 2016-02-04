@@ -24,6 +24,8 @@ dependencies:
     # too big and slowing down the build
     - I="image-$(date +%j).tar"; if [[ -e ~/docker/$I ]]; then echo "Loading $I"; docker load -i ~/docker/$I; fi
 
+    # create a version.json
+    - printf '{"commit":"%s","version":"%s","source":"https://github.com/%s/%s"}\n' "$CIRCLE_SHA1" "$CIRCLE_TAG" "$CIRCLE_PROJECT_USERNAME" "$CIRCLE_PROJECT_REPONAME" > version.json
     - docker build -t app:build .
 
     # Clean up any old images and save the new one

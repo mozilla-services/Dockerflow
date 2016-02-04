@@ -1,7 +1,7 @@
-var dispatch = require('httpdispatcher'),
-    http = require('http'),
-    fs = require('fs')
-    mozlog = require('mozlog');
+var dispatch = require('httpdispatcher');
+var http = require('http');
+var fs = require('fs');
+var mozlog = require('mozlog');
 
 mozlog.config({app: "dockerflow-demo"});
 var log = mozlog("general");
