@@ -1,9 +1,5 @@
 FROM node:4.2.4
 
-# install libgmp-dev for fast crypto and 
-RUN apt update && \
-    apt install -y libgmp-dev
-
 # add a non-privileged user for installing and running
 # the application
 RUN groupadd --gid 10001 app && \
