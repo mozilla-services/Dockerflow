@@ -6,41 +6,55 @@ var dispatch = require('httpdispatcher'),
 mozlog.config({app: "dockerflow-demo"});
 var log = mozlog("general");
 
+var verfile = __dirname + "/version.json";
+
 dispatch.onGet("/", (req, res) => {
   res.writeHead(200, {"Content-Type":"text/plain"});
   res.end("hello.")
 });
 
-// Service check endpoint
+// for service monitoring to make sure the 
+// service is responding and normal
 dispatch.onGet("/__heartbeat__", (req, res) => {
-  res.writeHead(200, {"Content-Type":"text/plain"});
-  res.end("OK")
+  fs.stat(verfile, (err) => {
+    if (err) {
+      res.writeHead(500, {"Content-Type":"text/plain"});
+      res.end("Could not find version file")
+    } else {
+      res.writeHead(200, {"Content-Type":"text/plain"});
+      res.end("OK")
+    }
+  });
 });
 
-// Load balancer check endpoint
+// for load balancers to make sure the app is 
+// running
 dispatch.onGet("/__lbheartbeat__", (req, res) => {
   res.writeHead(200, {"Content-Type":"text/plain"});
   res.end("OK")
 });
 
-// this demo uses an environment variable to 
-// find the location of the version file. 
 dispatch.onGet("/__version__", (req, res) => {
-  fs.stat(process.env.VERSION_FILE, (err, stats) => {
+  fs.stat(verfile, (err, stats) => {
     if (err) {
       res.writeHead(404, {"Content-Type":"text/plain"})
-      res.end("VERSION_FILE not found");
+      res.end("version data not found");
     } else {
       res.writeHead(200, {"Content-Type":"text/json"});
-      var fstream = fs.createReadStream(process.env.VERSION_FILE);
+      var fstream = fs.createReadStream(verfile);
       fstream.pipe(res)
     }
   });
 });
 
 // listen on the PORT env. variable
-http.createServer((res, req) => {
-  dispatch.dispatch(res, req);
-}).listen(process.env.PORT, ()=> { 
-  log.info("listening", {port: process.env.PORT})
-}); 
+if (process.env.PORT) {
+  http.createServer((res, req) => { 
+    dispatch.dispatch(res, req);
+  }).listen(process.env.PORT, ()=> { 
+    // output to stdout in mozlog format
+    log.info("server", {msg: "listening", port: process.env.PORT})
+  }); 
+} else {
+  log.error("server", {msg: "no PORT env var"});
+}
