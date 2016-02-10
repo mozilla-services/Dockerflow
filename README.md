@@ -87,7 +87,7 @@ Applications logs should be written to `stdout` and `stderr` in the [mozlog form
 To improve automation and transparency it is recommended containers are built at CircleCI and then pushed to Docker Hub. The build and test logs are accessible for public projects. This makes collaboration and contribution easier from both the community and Mozilla paid contributors. 
 
 1. Use CircleCI to build and test your container. 
-  - use the [circle.yml](https://github.com/mozilla-services/Dockerflow/circle.yml) as a starting point 
+  - use the [circle.yml](https://github.com/mozilla-services/Dockerflow/blob/master/circle.yml) as a starting point 
 2. If the container passes tests push it to Docker Hub with CircleCI
   - this requires cloudops set up the credentials in CircleCI. 
   - ping @mostlygeek with getting this set up
