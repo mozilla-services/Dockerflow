@@ -48,19 +48,17 @@ Don't panic. The list is short and easy to implement.
   * do not include dependency checks as this check may trigger automatic node termination and replacement
 
 
-### Configuration should follow these conventions...
+### Configuration
 
-The preferred and recommended method is to only use environment variables. This improves deployability and interopability. These should be documented in the application's repository.
+Only use environment variables for configuration. 
 
-However, if configuration files are more suitable then application should look for them in `$CONFIG_PATH`. This environment variable will point at either a single file or a directory. It is up to the application to use `$CONFIG_PATH` appropriately. 
+### Sending metrics and logs
 
-The format of the configuration file(s) should be documented with examples. 
+CloudOps provides two types of metrics dashboards, Kibana and statsd. 
 
-### Sending metrics and logs...
+Statsd data should be sent to `$STATSD_HOST` and `$STATD_PORT`. Statsd is always available to the application. Access to the statsd dashboard is available on request from CloudOps. 
 
-Applications can send statsd to `$STATSD_HOST` and `$STATD_PORT`. Check that these environment variable are set before sending metrics. Access to the statsd dashboard is available on request from CloudOps.
-
-Logs should be written to `stdout` and `stderr` as JSON in the [logging standard format](https://mana.mozilla.org/wiki/pages/viewpage.action?pageId=42895640). Logs will be sent to an ElasticSearch cluster. This is an opt-in feature and must be requested from CloudOps to enable.
+Applications logs should be written to `stdout` and `stderr` in the [mozlog format](https://mana.mozilla.org/wiki/pages/viewpage.action?pageId=42895640). These will be sent to an Elastic Search cluster and accessible via Kibana. This feature is enabled on request. 
 
 
 ## Building the Container
@@ -72,7 +70,8 @@ Logs should be written to `stdout` and `stderr` as JSON in the [logging standard
 
 ### Dockerfile Guidelines
 
-* Use the official Docker containers for a language. CloudOps pre-caches these on machines so downloading containers based on them is fast. 
+* Put the application into `/app` within the container
+* Use the Docker's base containers for a language. CloudOps pre-caches these on machines. 
   * [Node](https://hub.docker.com/_/node/)
   * [Python](https://hub.docker.com/_/python/)
   * [Golang](https://hub.docker.com/_/golang/)
