@@ -2,13 +2,13 @@
 
 # About
 
-CloudOps supports docker containers for deployment. This repo is both documentation and demonstration of how to instrument your application to reduce deployment friction. 
+Dockerflow is meant to be part of Cloud Service's deployment pipeline. Distributing our applications with Docker simplifies deployment and makes our services more accessible to the community. 
 
-**NOTE: this is a work in progress. Tags will be created on this repo when the Dockerflow spec has stabilized a bit.**
+The specification for Dockerflow is this README.md file. This repo also contains a reference application that will change as the specification changes. See the Contribution section for details on suggesting changes and providing feedback.
 
 ## Dockerflow
 
-The Dockerflow was designed with the goals of making deployment of applications easier and more transparent. It looks like this: 
+It looks like this: 
 
 ````
   +-(1)--+         +-(2)------------+        +-(3)--------+        +-(4)--------+
@@ -28,13 +28,13 @@ The Dockerflow was designed with the goals of making deployment of applications 
 1. Code pushed to github triggers the flow
 2. CI builds and tests the container
 3. Verified containers are pushed to Docker Hub
-4. Cloud Ops will use container for deployment
-5. Other parties can use the *same* container for their needs
+4. Cloud Ops will use the container for deployment
+5. Other parties can use the *same* container for private installations or projects
 
 
-## Container Design Requirements
+## Container Requirements
 
-Don't panic. These are easy and will help everybody Go Faster (tm).
+Don't panic. The list is short and easy to implement.
 
 ### A containerized app must...
 
@@ -46,6 +46,7 @@ Don't panic. These are easy and will help everybody Go Faster (tm).
 4. Respond to `/__lbheartbeat__` with an HTTP 200
   * used by the load balancer to check if the server and application is OK
   * do not include dependency checks as this check may trigger automatic node termination and replacement
+
 
 ### Configuration should follow these conventions...
 
@@ -84,8 +85,22 @@ Logs should be written to `stdout` and `stderr` as JSON in the [logging standard
 
 ### Automating the Build
 
-1. Use CircleCI to build and test your container
-2. If the container passes tests push it to Docker Hub with CircleCI
-3. ... (todo)
+To improve automation and transparency it is recommended containers are built at CircleCI and then pushed to Docker Hub. The build and test logs are accessible for public projects. This makes collaboration and contribution easier from both the community and Mozilla paid contributors. 
 
-----
+1. Use CircleCI to build and test your container. 
+  - use the [circle.yml](https://github.com/mozilla-services/Dockerflow/circle.yml) as a starting point 
+2. If the container passes tests push it to Docker Hub with CircleCI
+  - this requires cloudops set up the credentials in CircleCI. 
+  - ping @mostlygeek with getting this set up
+3. When the build is working add a CircleCI build badge to the projects README. 
+
+## Contributing
+
+### Getting help and reporting bugs
+
+* To get help with implementation, open a new issue and tag it with `[question]`.
+* If you find a bug, create a new issue and tag it with `[bug]`. 
+
+### Proposing changes
+
+* Open a new pull request with your changes
