@@ -3,7 +3,7 @@
 
 # About
 
-Dockerflow is a specification for creating Docker containers for deploying web services. 
+Dockerflow is a specification for how to dockerize Cloud Services' web applications so they are easy to deploy and share common behaviour. 
 
 The specification is this README.md file. This repo contains a reference application that will change with the specification. See the [Contribution document](CONTRIBUTE.md) for details on suggesting changes and providing feedback.
 
@@ -30,30 +30,30 @@ It looks like this:
 
 ### A containerized app must...
 
+1. Accept its configuration through environment variables
 1. Listen on environment variable `$PORT` for HTTP requests
-2. Respond to `/__version__` with a JSON object like: `{"source":"url to repo", "version":"human readable string", "commit":"git hash"}`
-3. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error
-  * used by external monitoring to check if the service is healthy
-  * include checks for the app's dependencies (database, caches, etc)
-4. Respond to `/__lbheartbeat__` with an HTTP 200
-  * used by load balancers to check if the host machine is healthy
-  * do not include dependency checks
+1. Respond to `/__version__` with a JSON object like: `{"source":"url to repo", "version":"human readable string", "commit":"git hash"}`
+1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should dependent services like the database to also ensure they are healthy.
+1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check any dependent services.
+1. Send logs to `stdout` or `stderr`. The recommended format is a JSON schema that [Heka](https://github.com/mozilla-services/heka) understands. This is known as mozlog and libraries are available for [nodejs](https://www.npmjs.com/package/mozlog) and [python](https://github.com/mozilla-services/mozservices/blob/master/mozsvc/util.py#L106).
 
-### Configuration
+### Dockerfile requirements
 
-Use environment variables for configuration. 
+1. Sources should be copied to the `/app` directory in the container.
+1. Create an `app` group with a GID of `10001`.
+1. Create an `app` user with a UID of `10001`. This should be in the `app` group.
+1. Have a `USER app` command to set the default user.
+1. Have a `ENTRYPOINT` and `CMD` commands which starts the service and listens on `$PORT`.
 
-### Logs
+See [Guidelines for Building a Container](docs/building-container.md) for more tips on making a production ready container.
 
-Send plain text logs `stdout` and/or `stderr`. 
+## Automated CI and Container creation
 
-The recommended format is a JSON schema that [Heka](https://github.com/mozilla-services/heka) understands. This is also known as mozlog. Libraries are available for [nodejs](https://www.npmjs.com/package/mozlog) and [python](https://github.com/mozilla-services/mozservices/blob/master/mozsvc/util.py#L106) to make implementation easier.
+See [Automating The Build](docs/automating-build.md) for information on using CI tools to build, test and deploy the container to Dockerhub.
 
-## Additional Reading
-
-* [Guidelines for Building a Container](docs/building-container.md)
-* [Automating the container build and push](docs/automating-build.md)
+## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
+
 
 
 
