@@ -28,7 +28,7 @@ It looks like this:
 
 ## Dockerflow Specification
 
-### A containerized app must...
+### Containerized App Requirements
 
 1. Accept its configuration through environment variables
 1. Listen on environment variable `$PORT` for HTTP requests
@@ -45,15 +45,14 @@ It looks like this:
 1. Have a `USER app` command to set the default user.
 1. Have a `ENTRYPOINT` and `CMD` commands which starts the service and listens on `$PORT`.
 
-See [Guidelines for Building a Container](docs/building-container.md) for more tips on making a production ready container.
+### Containerized App Recommendations
+
+1. [Static files should be served by the application](docs/serving-static-content.md)
+1. [Containers should be optimized for production use](docs/building-container.md)
 
 ## Automated CI and Container creation
 
 See [Automating The Build](docs/automating-build.md) for information on using CI tools to build, test and deploy the container to Dockerhub.
-
-## Misc
-
-* [Serving static content](docs/serving-static-content.md) 
 
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
