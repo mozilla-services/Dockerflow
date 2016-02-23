@@ -51,6 +51,10 @@ See [Guidelines for Building a Container](docs/building-container.md) for more t
 
 See [Automating The Build](docs/automating-build.md) for information on using CI tools to build, test and deploy the container to Dockerhub.
 
+## Misc
+
+* [Serving static content](docs/serving-static-content.md) 
+
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
 
