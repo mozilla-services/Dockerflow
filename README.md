@@ -3,7 +3,7 @@
 
 # About
 
-Dockerflow is a specification for how to dockerize Cloud Services' web applications so they are easy to deploy and share common behaviour. 
+Dockerflow is a specification for how to dockerize web applications so they are easy to deploy and share common behaviour. 
 
 The specification is this README.md file. This repo contains a reference application that will change with the specification. See the [Contribution document](CONTRIBUTE.md) for details on suggesting changes and providing feedback.
 
