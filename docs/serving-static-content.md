@@ -10,7 +10,7 @@ When using transpiling tools like [bablejs](https://babeljs.io/), [sass](http://
 
 ## How to serve static content
 
-### Serve it with the application
+### Serve assets with the application
 
 This is the recommended approach. It is the most idiomatic usage of containers to hide application dependencies from the host machine. For Dockerflow applications the docker host only needs to provide a `$PORT` and need not be concerned about what's inside. 
 
@@ -22,18 +22,13 @@ The downside is that applications may be more complex with additional dependenci
 
 If performance is important it is recommended to use nginx as a reverse *caching* proxy in front of the container. nginx will respect `Cache-Control` headers and serve assets as fast as the machine can handle. This setup would be dependent on the hosting service.
 
-### Serve it from the Docker host machine
+### Serve assets outside the container
 
-An alternative is to serve it from the Docker host machine directly. Some installations favor containers as a packaging and distribution solution over standard system packages like RPM. 
+An alternative is to copy static assets out and serve them elsewhere. This approach is discouraged but is acceptable for specific application requirements. 
 
-In these situations the Docker host machine needs to run a reverse proxy like nginx to route requests for static assets to a directory and dynamic requests to the application. 
+In this situation a process will copy out the static assets, relocate them and configure external hosting services. 
 
-For this to work the hosting service must:
-
-1. Copy static assets out of the container onto the host machine.
-2. Configure nginx to route requests appropriately.
-
-To copy static assets out of the container the host machine uses a command like:
+Copying out assets can be done like so:
 
 ```
 docker run --rm \
@@ -45,4 +40,4 @@ docker run --rm \
 1. A directory on the host machine is volume mounted into the container
 2. A shell command is used to copy assets out onto the host machine
 
-The greatest downside to this approach is the tight coupling between the host's deployment code and the application. The host machine's configuration has to be kept lockstep with the application's logic. Any changes to either will break the full functionality of the service. 
+Serving assets outside the container has additional overhead and risks. Changes to the hosting service, the assets or the configuration of the container can cause service disruption if things aren't kept in sync. 
