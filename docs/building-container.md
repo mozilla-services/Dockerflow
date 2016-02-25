@@ -2,8 +2,9 @@
 
 ### Dockerfile Examples 
 
+Note: These may not perfectly match Dockerflow as the spec is a current WIP
+
 * [BrowserID Verifier - Node 4](https://github.com/mozilla/browserid-verifier/blob/master/Dockerfile)
-* [Tokenserver - Python 2.7](https://github.com/mozilla-services/tokenserver/blob/master/Dockerfile)
 * [TestPilot - Python 3](https://github.com/mozilla/testpilot/blob/master/Dockerfile)
 
 ### Dockerfile Guidelines
