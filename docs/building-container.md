@@ -5,7 +5,6 @@
 * [BrowserID Verifier - Node 4](https://github.com/mozilla/browserid-verifier/blob/master/Dockerfile)
 * [Tokenserver - Python 2.7](https://github.com/mozilla-services/tokenserver/blob/master/Dockerfile)
 * [TestPilot - Python 3](https://github.com/mozilla/testpilot/blob/master/Dockerfile)
-* [Universal Search Recommendation - Python 3.5](https://github.com/mozilla/universal-search-recommendation/blob/master/app/Dockerfile)
 
 ### Dockerfile Guidelines
 
