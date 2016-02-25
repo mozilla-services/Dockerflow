@@ -35,7 +35,9 @@ It looks like this:
 1. Respond to `/__version__` with a JSON object like: `{"source":"url to repo", "version":"human readable string", "commit":"git hash"}`
 1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should dependent services like the database to also ensure they are healthy.
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check any dependent services.
-1. Send logs to `stdout` or `stderr`. The recommended format is a JSON schema that [Heka](https://github.com/mozilla-services/heka) understands. This is known as mozlog and libraries are available for [nodejs](https://www.npmjs.com/package/mozlog) and [python](https://github.com/mozilla-services/mozservices/blob/master/mozsvc/util.py#L106).
+1. Send logs to `stdout` or `stderr`. The recommended format is a JSON schema that [Heka](https://github.com/mozilla-services/heka) understands. This is known as mozlog and libraries are currently available for [nodejs](https://www.npmjs.com/package/mozlog). 
+
+[python](https://github.com/mozilla-services/mozservices/blob/master/mozsvc/util.py#L106).
 
 ### Dockerfile requirements
 
