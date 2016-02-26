@@ -37,8 +37,6 @@ It looks like this:
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check any dependent services.
 1. Send logs to `stdout` or `stderr`. The recommended format is a JSON schema that [Heka](https://github.com/mozilla-services/heka) understands. This is known as mozlog and libraries are currently available for [nodejs](https://www.npmjs.com/package/mozlog). 
 
-[python](https://github.com/mozilla-services/mozservices/blob/master/mozsvc/util.py#L106).
-
 ### Dockerfile requirements
 
 1. Sources should be copied to the `/app` directory in the container.
