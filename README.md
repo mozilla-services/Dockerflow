@@ -21,8 +21,8 @@ The specification is this README.md file. This repo contains a reference applica
 
 1. Code pushed to github triggers the flow
 2. CI builds and tests the container
-3. Verified containers are pushed to Docker Hub
-4. Container is deployed into a live system
+3. Tested containers are published to Docker Hub
+4. Container pull from Docker Hub to be used
 
 ## Specification
 
