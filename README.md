@@ -12,10 +12,10 @@ The specification is this README.md file. This repo contains a reference applica
 ## Automated Creation Pipeline
 
 ````
-  +-(1)--+         +-(2)------------+        +-(3)-------+        +-(4)--------+
-  | Code |         | CI builds and  |        |   Docker  |        | Container  |
-  | Push | ------> |tests container | -----> |    Hub    | -----> | Deployment |
-  +------+         +----------------+        +-----------+        +------------+
+  +-(1)--+         +-(2)-------------+        +-(3)-------+        +-(4)--------+
+  | Code |         |  CI builds and  |        |   Docker  |        | Container  |
+  | Push | ------> | tests container | -----> |    Hub    | -----> | Deployment |
+  +------+         +-----------------+        +-----------+        +------------+
 
 ````
 
