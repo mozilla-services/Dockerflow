@@ -3,7 +3,7 @@
 
 # Dockerflow
 
-Dockerflow is a specification for automated building, testing and publishing of web of application containers that comply to a common set of behaviours. Compliant web containers are simpler to deploy, monitor and manage in production.
+Dockerflow is a specification for automated building, testing and publishing of web application containers that comply to a common set of behaviours. Compliant web containers are simpler to deploy, monitor and manage in production.
 
 The specification is this README.md file. This repo contains a reference application that will change with the specification. See the [Contribution document](CONTRIBUTE.md) for details on suggesting changes and providing feedback.
 
