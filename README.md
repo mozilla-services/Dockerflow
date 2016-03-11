@@ -13,8 +13,8 @@ The specification is this README.md file. This repo contains a reference applica
 
 ````
   +-(1)--+         +-(2)------------+        +-(3)-------+        +-(4)--------+
-  |Code  |         | CI builds and  |        |   Docker  |        | Container  |
-  |Push  | ------> |tests container | -----> |    Hub    | -----> | Deployment |
+  | Code |         | CI builds and  |        |   Docker  |        | Container  |
+  | Push | ------> |tests container | -----> |    Hub    | -----> | Deployment |
   +------+         +----------------+        +-----------+        +------------+
 
 ````
