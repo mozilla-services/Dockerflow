@@ -21,12 +21,12 @@ The specification is this README.md file. This repo contains a reference applica
 
 1. Code pushed to github triggers the flow
 2. CI builds and tests the container
-3. Tested containers are published to Docker Hub
+3. Tested containers are published to Docker Hub.
 4. Container pull from Docker Hub to be used
 
 ## Specification
 
-The specification has requirements and recommendations. 
+The specification has requirements that a container must comply with. Recommendations are optional but encouraged if they are appropriate for the application.
 
 ### Building and Testing
 
