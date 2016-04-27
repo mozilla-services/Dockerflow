@@ -43,7 +43,7 @@ Dockerflow allows any automated build and test tool that meets these requirement
 
 1. Accept its configuration through environment variables
 1. Listen on environment variable `$PORT` for HTTP requests
-1. Respond to `/__version__` with a JSON object like: `{"source":"url to repo", "version":"human readable string", "commit":"git hash"}`
+1. Respond to `/__version__` with a [JSON object](docs/version-object.md).
 1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should check backing services like a database for connectivity.
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check backing services.
 1. Send text logs to `stdout` or `stderr`. 
@@ -57,10 +57,12 @@ Dockerflow allows any automated build and test tool that meets these requirement
 1. Use `USER app` to set the default user.
 1. Have a `ENTRYPOINT` and `CMD` commands which starts the service.
 
-### Containerized App Recommendations
+### Optional Recommendations
 
-1. [Containers should be optimized for production use](docs/building-container.md)
-1. Send logs to `stdout` in the [mozlog](docs/mozlog.md) json schema. 
+1. Log to `stdout` in the [mozlog](docs/mozlog.md) json schema. 
+1. [Containers should be optimized for production use](docs/building-container.md).
+1. CI builds should generate a `docker-image-shasum256.txt` ([example](https://circle-artifacts.com/gh/mozilla-services/Dockerflow/37/artifacts/0/tmp/circle-artifacts.SboyKpb/docker-image-shasum256.txt)) file containing *only* the sha256 hash for the docker image.
+
 
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
