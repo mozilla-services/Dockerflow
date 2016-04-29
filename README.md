@@ -43,7 +43,7 @@ Dockerflow allows any automated build and test tool that meets these requirement
 
 1. Accept its configuration through environment variables
 1. Listen on environment variable `$PORT` for HTTP requests
-1. Respond to `/__version__` with a [JSON object](docs/version-object.md).
+1. Respond to `/__version__` with a [JSON object](docs/version_object.md).
 1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should check backing services like a database for connectivity.
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check backing services.
 1. Send text logs to `stdout` or `stderr`. 
