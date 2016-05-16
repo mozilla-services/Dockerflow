@@ -19,7 +19,7 @@ A mozlog message looks like this:
 		"method": "GET",
 		"msg": "the user wanted something.",
 		"path": "/something",
-		"t": 145767775000,
+		"t": 5,
 		"uid": "12345"
 	}
 }
