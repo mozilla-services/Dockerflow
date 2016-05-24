@@ -12,6 +12,7 @@ machine:
 dependencies:
   override:
     - docker info
+    - echo "$DOCKERHUB_REPO"
 
     # create a version.json
     - >
