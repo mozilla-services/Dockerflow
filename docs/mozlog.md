@@ -1,6 +1,6 @@
 # mozlog
 
-mozlog is JSON schema for a common application logging format. By standardizing on a specific format it is easier to write parsers, extractors and aggregators for logs. It is a Mozilla Cloud Services standard and is reproduced here for ease of reference. 
+mozlog is JSON schema for a common application logging format. By standardizing on a specific format it is easier to write parsers, extractors and aggregators for logs. It is a Mozilla Cloud Services standard and is reproduced here for ease of reference.
 
 A mozlog message looks like this:
 
@@ -40,26 +40,58 @@ A mozlog message looks like this:
 
 ## `Fields` property
 
-The `Fields` property can be a multi-dimensional hash of fields. For example: 
+The `Fields` property can be a multi-dimensional object.
+
+For example:
 
 ```
-{ ... 
+{ ...
   "Fields": {
     "name": "a string",
     "age" : 123,
     "points": [1,2, "three", {"num": 4.0} ],
     "address": {
       "street": ...
-    }    
+    }
   }
 }
 ```
 
-It is recommended to keep things conservative. While you do not need to use a flat hash, having too many levels makes parsing slow and extracting data more difficult. 
+It is recommended to keep things conservative. `Fields` can contain objects but those objects must not nest additional objects.
+
+This is OK:
+
+```
+{ ...
+  "Fields": {
+    "data": {
+      "key": "value",
+      "list": [1,2,3,4,5],
+      "num": 123
+    }
+  }
+}
+
+```
+
+This is NOT OK:
+
+```
+{ ...
+  "Fields": {
+    "data": {
+	   "moredata": {
+	      "key": "value",
+	      "num": 123
+	   }
+    }
+  }
+}
+```
 
 ### Application Request Summary (Type: "request.summary")
 
-For http requests it is recommended to include these common fields in a single log message rather than spread them over several individual log messages. 
+For http requests it is recommended to include these common fields in a single log message rather than spread them over several individual log messages.
 
 | Field Name | Type | Description | Required | PII[1] | Notes }
 |---|---|---|---|---|---|
@@ -75,7 +107,7 @@ For http requests it is recommended to include these common fields in a single l
 | rid | string | unique request id for correlating other log lines | optional |   |  |
 | service | string | If this server is used by multiple cloud services, which service? | recommended if appropriate | can be (in particular if non-mozilla services enter the mix). Not filtering yet but we may need to eventually. | This field is important for looking at how frequently various services are being used, what services are on-ramps to accounts, etc. Over time this is going to become a very important segmentation. |
 | t | int32 | request processing time in ms | optional |   |  |
-| uid | string | user id | recommended | yes; will be scrubbed by pii filter before being indexed in es | This field is often very important for "daily active user" counts (and similar). These counts are usually computed by heka filters before pii scrubbing. |	 
+| uid | string | user id | recommended | yes; will be scrubbed by pii filter before being indexed in es | This field is often very important for "daily active user" counts (and similar). These counts are usually computed by heka filters before pii scrubbing. |
 
 [1] How to handle Personally Identifiable Information.
 
