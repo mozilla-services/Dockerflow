@@ -26,7 +26,7 @@ dependencies:
     - docker build -t app:build .
 
     # write the sha256 sum to an artifact to make image verification easier
-    - docker images --no-trunc | awk '/^app/ {print $3}' | tee $CIRCLE_ARTIFACTS/docker-image-shasum256.txt
+    - docker inspect --format '{{json .Config.Image}}' app:build | tr -d '"''"' | tee $CIRCLE_ARTIFACTS/docker-image-shasum256.txt
 
 test:
   override:
