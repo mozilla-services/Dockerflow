@@ -15,8 +15,8 @@ dependencies:
 
     # create a version.json
     - >
-        printf '{"commit":"%s","version":"%s","source":"https://github.com/%s/%s","build":"%s"}\n' 
-        "$CIRCLE_SHA1" 
+        printf '{"commit":"%s","version":"%s","source":"https://github.com/%s/%s","build":"%s"}\n'
+        "$CIRCLE_SHA1"
         "$CIRCLE_TAG"
         "$CIRCLE_PROJECT_USERNAME"
         "$CIRCLE_PROJECT_REPONAME"
@@ -24,9 +24,6 @@ dependencies:
         > version.json
 
     - docker build -t app:build .
-
-    # write the sha256 sum to an artifact to make image verification easier
-    - docker inspect --format '{{json .Config.Image}}' app:build | tr -d '"''"' | tee $CIRCLE_ARTIFACTS/docker-image-shasum256.txt
 
 test:
   override:
