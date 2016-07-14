@@ -47,7 +47,7 @@ When the application is ran in the container it must:
 1. Respond to `/__version__` with the contents of `/app/version.json`.
 1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should check backing services like a database for connectivity.
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check backing services.
-1. Send text logs to `stdout` or `stderr`. 
+1. Send text logs to `stdout` or `stderr`.
 1. Serve its own [static content](docs/serving-static-content.md).
 
 ### Dockerfile requirements
@@ -60,9 +60,8 @@ When the application is ran in the container it must:
 
 ### Optional Recommendations
 
-1. Log to `stdout` in the [mozlog](docs/mozlog.md) json schema. 
+1. Log to `stdout` in the [mozlog](docs/mozlog.md) json schema.
 1. [Containers should be optimized for production use](docs/building-container.md).
-1. CI builds should generate a `docker-image-shasum256.txt` ([example](https://circle-artifacts.com/gh/mozilla-services/Dockerflow/37/artifacts/0/tmp/circle-artifacts.SboyKpb/docker-image-shasum256.txt)) file containing *only* the sha256 hash for the docker image.
 
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
