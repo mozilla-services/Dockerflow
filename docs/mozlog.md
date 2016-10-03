@@ -95,7 +95,7 @@ For http requests it is recommended to include these common fields in a single l
 
 | Field Name | Type | Description | Required | PII[1] | Notes }
 |---|---|---|---|---|---|
-| agent | string | User agent string: stack overflow summary | recommended | can be; will be parsed into `user_agent_browser` , `user_agent_os`, `user_agent_version` for common user agents and then scrubbed by the pii filter | imprortant for device/desktop segmentations, which are derived from this field. |
+| agent | string | User agent string | recommended | can be; will be parsed into `user_agent_browser` , `user_agent_os`, `user_agent_version` for common user agents and then scrubbed by the pii filter | imprortant for device/desktop segmentations, which are derived from this field. |
 | context | string | Does this request have different contexts it might be coming from? (e.g. "first time experience" vs. "settings panel") | recommended if appropriate |   | Can be useful for understanding how users are using services. |
 | email | string | email used in this request | discouraged | yes; will be scrubbed by pii filter before being indexed | Some servers need this to be logged (fraud detection, etc.); only log email addresses if you have a specific need. |
 | errno | int32 | 0 for success or a number > 0 for errors, defined by the application | recommended |  | use HTTP error response code, e.g. 404, 503, etc |
