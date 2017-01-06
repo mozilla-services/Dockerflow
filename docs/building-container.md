@@ -4,6 +4,7 @@
 * Set a non-root user and group `app` in the container and run everything as this user
   * make the uid for the user `10001`
   * make the guid for the group `10001`
+  * this user is for privilege deescalation and should have read-only access to files
 * Use the Docker's base containers for a language. 
   * [Node](https://hub.docker.com/_/node/)
   * [Python](https://hub.docker.com/_/python/)
