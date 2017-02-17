@@ -29,7 +29,7 @@ A mozlog message looks like this:
 
 | Name  | Type  | Description  | Required  | Notes  |
 |---|---|---|---|---|
-| Timestamp  | int64  |  Number of nanoseconds since the UNIX epoch  | required | If human readable time is absolutely necessary, add an additional "Time" field that complies to [RFC3339](https://tools.ietf.org/html/rfc3339#section-5.8) |
+| Timestamp  | int64  |  Number of nanoseconds since the UNIX epoch in the UTC timezone  | required | If human readable time is absolutely necessary, add an additional "Time" field that complies to [RFC3339](https://tools.ietf.org/html/rfc3339#section-5.8) |
 | Type  | string | Type of message i.e. “request.summary” | recommended |   |
 | Logger  | string | Data source that is creating the log, ie: docker | recommended |   |
 | Hostname  | string | Hostname that generated the message | recommended |  |
@@ -114,5 +114,5 @@ For http requests it is recommended to include these common fields in a single l
 ## Implementations
 
 * [nodejs](https://www.npmjs.com/package/mozlog)
-* [golang](https://github.com/mozilla-services/go-mozlog)
+* [golang](https://github.com/mozilla-services/go-mozlogrus)
 * Python ...
