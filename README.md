@@ -63,6 +63,7 @@ When the application is ran in the container it must:
 1. Log to `stdout` in the
    [mozlog](https://wiki.mozilla.org/Firefox/Services/Logging) json schema.
 1. [Containers should be optimized for production use](docs/building-container.md).
+1. Listen on port 8000.
 
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
