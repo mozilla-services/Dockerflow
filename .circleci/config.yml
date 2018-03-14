@@ -34,7 +34,7 @@ jobs:
       # required since Workflows do not have the same remote docker instance.
       - run:
           name: docker save app:build
-          command: mkdir -p /cache ; docker save -o /cache/docker.tar "app:build"
+          command: mkdir -p /cache; docker save -o /cache/docker.tar "app:build"
       - save_cache:
           key: v1-{{ .Branch }}-{{epoch}}
           paths:
@@ -74,7 +74,7 @@ jobs:
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker tag app:build ${DOCKERHUB_REPO}:latest
               docker push ${DOCKERHUB_REPO}:latest
-            elif  [ ! -z "$CIRCLE_TAG" ]; then
+            elif  [ ! -z "${CIRCLE_TAG}" ]; then
             # deploy a release tag...
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               echo "${DOCKERHUB_REPO}:${CIRCLE_TAG}"
