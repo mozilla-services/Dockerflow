@@ -22,6 +22,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test" : "echo 'TODO put test here.'; true"
+    "test" : "cat version.json; true"
   }
 }
