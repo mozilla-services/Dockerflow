@@ -68,14 +68,13 @@ jobs:
       - run:
           name: Deploy to Dockerhub
           command: |
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             # deploy master
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker tag app:build ${DOCKERHUB_REPO}:latest
               docker push ${DOCKERHUB_REPO}:latest
             elif  [ ! -z "${CIRCLE_TAG}" ]; then
             # deploy a release tag...
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
               echo "${DOCKERHUB_REPO}:${CIRCLE_TAG}"
               docker tag app:build "${DOCKERHUB_REPO}:${CIRCLE_TAG}"
               docker images
