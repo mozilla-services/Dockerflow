@@ -11,6 +11,12 @@ jobs:
       - image: docker:18.02.0-ce
     working_directory: /dockerflow
     steps:
+     - run:
+         name: Install git and ssh
+         command: |
+           apk update
+           apk add git openssh
+ 
       - checkout
       - setup_remote_docker
 
