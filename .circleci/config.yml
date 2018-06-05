@@ -12,6 +12,8 @@ jobs:
     working_directory: /dockerflow
     steps:
      - run:
+         # CircleCI's built-in git fails to clone tags
+         # https://discuss.circleci.com/t/checkout-fails-on-git-tags-when-git-directory-is-already-present/22437
          name: Install git and ssh
          command: |
            apk update
