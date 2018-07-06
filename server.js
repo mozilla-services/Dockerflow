@@ -13,7 +13,7 @@ dispatch.onGet("/", (req, res) => {
   res.end("hello.")
 });
 
-// for service monitoring to make sure the 
+// for service monitoring to make sure the
 // service is responding and normal
 dispatch.onGet("/__heartbeat__", (req, res) => {
   fs.stat(verfile, (err) => {
@@ -22,12 +22,12 @@ dispatch.onGet("/__heartbeat__", (req, res) => {
       res.end("Could not find version file")
     } else {
       res.writeHead(200, {"Content-Type":"text/plain"});
-      res.end("OK")
+      res.end("{\"status\":\"ok\",\"checks\": {\"version_file_exists\": \"ok\"}}")
     }
   });
 });
 
-// for load balancers to make sure the app is 
+// for load balancers to make sure the app is
 // running
 dispatch.onGet("/__lbheartbeat__", (req, res) => {
   res.writeHead(200, {"Content-Type":"text/plain"});
