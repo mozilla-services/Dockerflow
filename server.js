@@ -22,7 +22,7 @@ dispatch.onGet("/__heartbeat__", (req, res) => {
       res.end("Could not find version file")
     } else {
       res.writeHead(200, {"Content-Type":"text/plain"});
-      res.end("{\"status\":\"ok\",\"checks\": {\"version_file_exists\": \"ok\"}}")
+      res.end("{\"status\":\"ok\",\"checks\": {\"version_file_exists\": \"ok\"},\"details\": {}}")
     }
   });
 });
