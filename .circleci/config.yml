@@ -11,6 +11,12 @@ jobs:
       - image: docker:18.02.0-ce
     working_directory: /dockerflow
     steps:
+      # workaround circleci's fallback git's "object not found" error w/ tag
+      # builds
+      - run:
+          name: Install Docker build dependencies
+          command: apk add --no-cache openssh-client git
+
       - checkout
       - setup_remote_docker
 
