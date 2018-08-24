@@ -60,6 +60,7 @@ When the application is ran in the container it must:
 
 ### Optional Recommendations
 
+1. Each instance of a container should only run one process. If you need to run two processes, just create another instance of the container & run a different command.
 1. Log to `stdout` in the
    [mozlog](https://wiki.mozilla.org/Firefox/Services/Logging) json schema.
 1. [Containers should be optimized for production use](docs/building-container.md).
