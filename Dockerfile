@@ -1,4 +1,4 @@
-FROM node:4.8.7-alpine
+FROM node:4.8.7
 
 # add a non-privileged user for installing and running
 # the application
