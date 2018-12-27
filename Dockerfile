@@ -1,21 +1,21 @@
-FROM node:4.8.7
+FROM node:10-slim
 
-# add a non-privileged user for installing and running
-# the application
-RUN addgroup -g 10001 app && \
-    adduser -D -G app -h /app -u 10001 app
+# add a non-privileged user for running the application
+RUN groupadd --gid 10001 app && \
+    useradd -g app --uid 10001 --shell /usr/sbin/nologin --create-home --home-dir /app app
 
 WORKDIR /app
 
 # Install node requirements and clean up unneeded cache data
 COPY package.json package.json
-USER app
 RUN npm install && \
-    npm cache clear && \
+    npm cache clear --force && \
     rm -rf ~app/.node-gyp
 
 # Finally copy in the app's source file
 COPY . /app
 
+ENV PORT=8000
+USER app
 ENTRYPOINT ["npm"]
 CMD ["start"]
