@@ -12,6 +12,7 @@
  [Here](https://hub.docker.com/explore/) is a list of the officially supported docker images.
 
 * Build the smallest container you can. If you're looking to shrink the size of your Docker image, you should consider using the -slim tag within each Official image. They ship with fewer libraries and tools, so you start with a smaller base image.
+* Take into account the security implications of your decision. For example, a larger container is preferable to one that ships with out of date or insecure packages.
 * Optimize for cachability. Put commands that make fewer changes (`apt-get`, `pip install`, `npm install`) earlier in the `Dockerfile`.
 * Put the application into `/app` within the container
 * Set a non-root user and group `app` in the container and run everything as this user
