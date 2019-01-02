@@ -3,6 +3,7 @@
   * [Node](https://hub.docker.com/_/node/)
   * [Python](https://hub.docker.com/_/python/)
   * [Golang](https://hub.docker.com/_/golang/)
+  * [Rust](https://hub.docker.com/_/rust)
 
  Official images have the benefit of receiving timely security updates and access to build and modify them is limited to dedicated maintainers.
 
