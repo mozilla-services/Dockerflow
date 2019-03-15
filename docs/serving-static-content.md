@@ -6,7 +6,7 @@ It is up to the developer to choose the suitable method based on where their app
 
 ## Generated static assets
 
-When using transpiling tools like [bablejs](https://babeljs.io/), [sass](http://sass-lang.com/) and [browserify](http://browserify.org/) only have their output and not the source in the container. Use a [.dockerignore](https://github.com/mozilla/testpilot/blob/master/.dockerignore) file to exclude source directories. If source materials are required it is OK to include them in the container to be used at run time. 
+When using transpiling tools like [babeljs](https://babeljs.io/), [sass](http://sass-lang.com/) and [browserify](http://browserify.org/) only have their output and not the source in the container. Use a [.dockerignore](https://github.com/mozilla/testpilot/blob/master/.dockerignore) file to exclude source directories. If source materials are required it is OK to include them in the container to be used at run time. 
 
 ## How to serve static content
 
