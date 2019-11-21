@@ -66,5 +66,9 @@ When the application is ran in the container it must:
 1. [Containers should be optimized for production use](docs/building-container.md).
 1. Listen on port 8000.
 
+### Docker Hub Credentials
+
+Internal processes for managing `DOCKER_USER` and `DOCKER_PASS` per-project are documented in `hiera-sops/misc/dockerhub/`. 
+
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
