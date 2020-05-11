@@ -28,7 +28,7 @@ The specification has requirements that a container must comply with. Recommenda
 
 ### Building and Testing
 
-Dockerflow allows any automated build and test tool that meets these requirements:
+Dockerflow requires an automated build and test tool that meets these requirements:
 
 1. Able to trigger a build from a code change like a pull request or a merge.
 1. Able to run tests on the code and the application in the container.
@@ -36,6 +36,8 @@ Dockerflow allows any automated build and test tool that meets these requirement
 1. Able to publish container to Docker Hub.
 1. Able to provide a build and test log.
 1. Secure and keeps secrets from being exposed.
+
+Within Mozilla, we support the use of CircleCI or Taskcluster.
 
 ### Containerized App Requirements
 
