@@ -1,60 +1,46 @@
-var dispatch = require('httpdispatcher');
-var http = require('http');
-var fs = require('fs');
-var mozlog = require('mozlog');
+const fs = require('fs');
+const express = require('express')
 
-mozlog.config({app: "dockerflow-demo"});
-var log = mozlog("general");
-
-var verfile = __dirname + "/version.json";
-
-dispatch.onGet("/", (req, res) => {
-  res.writeHead(200, {"Content-Type":"text/plain"});
-  res.end("hello.")
+const mozlog = require('mozlog')({
+  app: "dockerflow-demo"
 });
+const log = mozlog("general");
+
+const verfile = __dirname + "/version.json";
+
+const app = express();
+
+app.get('/', (req, res) => res.send('Hello from dockerflow example app!'));
 
 // for service monitoring to make sure the
 // service is responding and normal
-dispatch.onGet("/__heartbeat__", (req, res) => {
+app.get("/__heartbeat__", (req, res) => {
   fs.stat(verfile, (err) => {
     if (err) {
-      res.writeHead(500, {"Content-Type":"text/plain"});
-      res.end("Could not find version file")
+      res.status(500).send({ "status": "error", "checks": {"version_file_exists": "error"}, "details": {} });
     } else {
-      res.writeHead(200, {"Content-Type":"application/json"});
-      res.end("{\"status\":\"ok\",\"checks\": {\"version_file_exists\": \"ok\"},\"details\": {}}")
+      res.send({ "status": "ok", "checks": {"version_file_exists": "ok"}, "details": {} });
     }
   });
 });
 
 // for load balancers to make sure the app is
 // running
-dispatch.onGet("/__lbheartbeat__", (req, res) => {
-  res.writeHead(200, {"Content-Type":"text/plain"});
-  res.end("OK")
-});
+app.get("/__lbheartbeat__", (req, res) => res.send("OK"));
 
-dispatch.onGet("/__version__", (req, res) => {
+app.get("/__version__", (req, res) => {
   fs.stat(verfile, (err, stats) => {
     if (err) {
-      res.writeHead(404, {"Content-Type":"text/plain"})
-      res.end("version data not found");
+      res.status(404).send("version data not found");
     } else {
-      res.writeHead(200, {"Content-Type":"text/json"});
-      var fstream = fs.createReadStream(verfile);
-      fstream.pipe(res)
+      res.sendFile(verfile);
     }
   });
 });
 
 // listen on the PORT env. variable
 if (process.env.PORT) {
-  http.createServer((res, req) => { 
-    dispatch.dispatch(res, req);
-  }).listen(process.env.PORT, ()=> { 
-    // output to stdout in mozlog format
-    log.info("server", {msg: "listening", port: process.env.PORT})
-  }); 
+  app.listen(process.env.PORT, () => log.info("server", {msg: "listening", port: process.env.PORT}));
 } else {
   log.error("server", {msg: "no PORT env var"});
 }
