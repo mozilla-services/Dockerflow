@@ -1,4 +1,4 @@
-[![Docker Build Status](https://circleci.com/gh/mozilla-services/Dockerflow/tree/master.svg?style=shield&circle-token=c7c606e039cdccd2380782672ac12b2e85550295)](https://circleci.com/gh/mozilla-services/Dockerflow)
+[![Docker Build Status](https://circleci.com/gh/mozilla-services/Dockerflow/tree/main.svg?style=shield&circle-token=c7c606e039cdccd2380782672ac12b2e85550295)](https://circleci.com/gh/mozilla-services/Dockerflow)
 
 
 # Dockerflow
@@ -70,7 +70,7 @@ When the application is ran in the container it must:
 
 ### Docker Hub Credentials
 
-Internal processes for managing `DOCKER_USER` and `DOCKER_PASS` per-project are documented in `hiera-sops/misc/dockerhub/`. 
+Internal processes for managing `DOCKER_USER` and `DOCKER_PASS` per-project are documented in `hiera-sops/misc/dockerhub/`.
 
 ## Contributing
 * [Contribution Guidelines](CONTRIBUTE.md)
