@@ -37,7 +37,7 @@ Dockerflow requires an automated build and test tool that meets these requiremen
 1. Able to provide a build and test log.
 1. Secure and keeps secrets from being exposed.
 
-Within Mozilla, we support the use of CircleCI or Taskcluster.
+Within Mozilla, we support the use of CircleCI, Taskcluster, or Github Actions.
 
 ### Containerized App Requirements
 
