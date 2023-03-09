@@ -33,7 +33,7 @@ Dockerflow requires an automated build and test tool that meets these requiremen
 1. Able to trigger a build from a code change like a pull request or a merge.
 1. Able to run tests on the code and the application in the container.
 1. Able to manually trigger a previous build and test.
-1. Able to publish container to Docker Hub.
+1. Able to publish container to Docker Hub or Google Artifact Registry.
 1. Able to provide a build and test log.
 1. Secure and keeps secrets from being exposed.
 
