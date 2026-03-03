@@ -49,6 +49,7 @@ When the application is ran in the container it must:
 1. Respond to `/__version__` with the contents of `/app/version.json`.
 1. Respond to `/__heartbeat__` with a HTTP 200 or 5xx on error. This should check backing services like a database for connectivity and may respond with the status of backing services and application components as a JSON payload.
 1. Respond to `/__lbheartbeat__` with an HTTP 200. This is for load balancer checks and should **not** check backing services.
+1. Respond to `/__error__` with an HTTP 500. This endpoint should log and throw an error, used for testing purposes.
 1. Send text logs to `stdout` or `stderr`.
 1. Serve its own [static content](docs/serving-static-content.md).
 
